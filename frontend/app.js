@@ -1,3 +1,3 @@
-import AppHello from './src/app-hello';
+import AppRectangle from './src/app-rectangle';
 
-customElements.define('app-hello', AppHello);
+customElements.define('app-rectangle', AppRectangle);
