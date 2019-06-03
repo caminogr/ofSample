@@ -1,9 +1,24 @@
-  const osc = require('node-osc');
+const express = require('express');
+const app = express();
+
+const osc = require('node-osc');
  
-const client = new osc.Client('127.0.0.1', 8000);
+const oscClient = new osc.Client('127.0.0.1', 8000);
  
-setInterval(() => {
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+app.post('/api/notify-position', (req, res) => {
+  console.log('req', req)
+  console.log('res', res)
   // send (address, x, y, eventType);
-  client.send('/mouse/button', 50, 90, "down");
+  oscClient.send('/mouse/button', 50, 90, "down");
   console.log("messege send");
-}, 5000);
+  res.send("OK")
+});
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))

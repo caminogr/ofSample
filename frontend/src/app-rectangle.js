@@ -1,3 +1,5 @@
+import { postPosition } from '../api/index';
+
 export default class AppRectangle extends HTMLElement {
   static get template() {
     return `
@@ -8,7 +10,7 @@ export default class AppRectangle extends HTMLElement {
           background-color: red;
         }
       </style>
-      <div class="rectangle"></div>`
+      <div class="rectangle" id="rectangle"></div>`
   }
 
   constructor() {
@@ -18,6 +20,11 @@ export default class AppRectangle extends HTMLElement {
   connectedCallback() {
     this.attachShadow({
       mode: 'open'
-    }).innerHTML = AppRectangle.template;
+    })
+  this.shadowRoot.innerHTML = AppRectangle.template;
+    this.rectangle = this.shadowRoot.querySelector("#rectangle");
+    this.rectangle.addEventListener('click', e => {
+      postPosition(1, 2);
+    })
   }
 }
