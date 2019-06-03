@@ -13,11 +13,8 @@ app.use((req, res, next) => {
 });
 
 app.post('/api/notify-position', (req, res) => {
-  console.log('req', req)
-  console.log('res', res)
   // send (address, x, y, eventType);
   oscClient.send('/mouse/button', 50, 90, "down");
-  console.log("messege send");
   res.send("OK")
 });
 
