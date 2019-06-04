@@ -5,12 +5,9 @@ const instance = axios.create({
   timeout: 1000,
 });
 
-export const postPosition = async (x, y) => {
-  console.log('send x,y: ', x, y)
+export const postPosition = async position => {
   try {
-    await instance.post(`/api/notify-position`, {
-      x, y,
-    });
+    await instance.post('/api/notify-position', { position });
   } catch (e) {
     console.error('error: ', e)
     return null;

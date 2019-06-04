@@ -1,10 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
 const osc = require('node-osc');
  
 const oscClient = new osc.Client('127.0.0.1', 8000);
  
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -13,8 +19,8 @@ app.use((req, res, next) => {
 });
 
 app.post('/api/notify-position', (req, res) => {
-  // send (address, x, y, eventType);
-  oscClient.send('/mouse/button', 50, 90, "down");
+  const {x, y} = position;
+  oscClient.send('/mouse/button', x, y, "down");
   res.send("OK")
 });
 
