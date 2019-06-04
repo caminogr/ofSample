@@ -24,4 +24,10 @@ app.post('/api/notify-position', (req, res) => {
   res.send("OK")
 });
 
+app.post('/api/post-text', (req, res) => {
+  const { text } = req.body;
+  oscClient.send('/input/text', text);
+  res.send("OK")
+});
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

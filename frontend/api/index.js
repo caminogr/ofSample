@@ -13,3 +13,12 @@ export const postPosition = async position => {
     return null;
   }
 };
+
+export const postText = async text => {
+  try {
+    await instance.post('/api/post-text', { text })
+  } catch (e) {
+    console.error('error: ', e)
+    return null;
+  }
+};
