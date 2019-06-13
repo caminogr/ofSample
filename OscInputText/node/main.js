@@ -19,6 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.post('/api/notify-position', (req, res) => {
+  // = req.position??
   const {x, y} = position;
   oscClient.send('/mouse/button', x, y, "down");
   res.send("OK")

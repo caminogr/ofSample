@@ -15,6 +15,13 @@ void ofApp::setup(){
 
     //指定したポートで接続
     receiver.setup( PORT );
+
+
+    box2d.init();
+    box2d.createGround();
+    box2d.createBounds();
+    box2d.registerGrabbing();
+    box2d.setFPS(60);
     
     //値を初期化
 //    mouseX = 0;
@@ -42,6 +49,7 @@ void ofApp::update(){
     
         dumpOSC(m);
     }
+    box2d.update();
 }
 
 //OSCメッセージをコンソールに出力する関数
@@ -72,9 +80,23 @@ void ofApp::dumpOSC(ofxOscMessage m) {
 void ofApp::draw(){
     ofSetColor(40, 30, 60);
     font.drawString(postedText, 100, 200);
+
+    //  draw each circle
+    ofSetColor(255, 150, 150);
+    for (int i = 0; i < circles.size(); i++)
+        circles[i].get()->draw();
+
 }
 
-void ofApp::keyPressed (int key){}
+void ofApp::keyPressed (int key){
+    //  create a new circle
+    shared_ptr<ofxBox2dCircle> circle = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
+    //  set attributes to this circle (density, bounce, friction)
+    circle.get()->setPhysics(1.0, 0.5, 0.1);
+    circle.get()->setup(box2d.getWorld(), mouseX, mouseY, ofRandom(10, 20));
+    //  add this circle to "circles" vector
+    circles.push_back(circle);
+}
 
 void ofApp::mouseMoved(int x, int y ){}
 

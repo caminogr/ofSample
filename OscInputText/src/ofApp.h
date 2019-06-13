@@ -1,7 +1,7 @@
-#pragma once
-
+#pragma once 
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "ofxBox2d.h"
 
 //ポート番号を設定
 #define PORT 8000
@@ -24,6 +24,8 @@ public:
     void dumpOSC(ofxOscMessage m); //OSCメッセージを出力
 
 private:
+    ofxBox2d box2d;
+    vector<shared_ptr<ofxBox2dCircle>> circles;
     ofTrueTypeFont font;
     //OSCメッセージを受信するインスタンス
     ofxOscReceiver    receiver;
