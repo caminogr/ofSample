@@ -5,7 +5,7 @@ void ofApp::setup(){
     ofSetFrameRate(30);
     ofSetBackgroundColor(249);
 
-    font.load("NotoSansCJKjp-Regular.ttf", 72);
+    font.load("NotoSansCJKjp-Regular.ttf", 72, true, true, true);
 
     // font = new ofTrueTypeFont();
     // ofTrueTypeFontSettings settings("NotoSansCJKjp-Regular.ttf", 30);
@@ -22,7 +22,7 @@ void ofApp::setup(){
     box2d.createBounds();
     box2d.registerGrabbing();
     box2d.setFPS(60);
-    
+
     //値を初期化
 //    mouseX = 0;
 //    mouseY = 0;
@@ -38,15 +38,15 @@ void ofApp::update(){
         //次のメッセージを取得
         ofxOscMessage m;
         receiver.getNextMessage( m );
-        
+
         string msg_string;
-        
+
         if ( m.getAddress() == "/input/text") {
             msg_string = m.getAddress();
             postedText = m.getArgAsString( 0 );
             cout << "postedText: " << postedText << endl;
         }
-    
+
         dumpOSC(m);
     }
     box2d.update();
@@ -79,12 +79,20 @@ void ofApp::dumpOSC(ofxOscMessage m) {
 
 void ofApp::draw(){
     ofSetColor(40, 30, 60);
-    font.drawString(postedText, 100, 200);
+
+    // font.drawString(postedText, 100, 200);
+
+    string word = "abcd";
+    paths = font.getStringAsPoints(word);
+    ofPolyline polyline = paths[0].getOutline()[0];
+    // vector<ofPolyline> outline = paths.getOutline()[0];
+    polyline.draw();
+
 
     //  draw each circle
-    ofSetColor(255, 150, 150);
-    for (int i = 0; i < circles.size(); i++)
-        circles[i].get()->draw();
+    // ofSetColor(255, 150, 150);
+    // for (int i = 0; i < circles.size(); i++)
+        // circles[i].get()->draw();
 
 }
 
