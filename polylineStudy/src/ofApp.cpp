@@ -5,7 +5,7 @@ void ofApp::setup(){
     ofSetFrameRate(30);
     
 //    ttf.load("apple_gothic.ttf", 72, true, false, true);
-    ttf.load("NotoSansCJKjp-Regular.ttf", 72, true, true, true);
+    ttf.load("NotoSansCJKjp-Regular.ttf", 72, true, false, true);
 
     svg.load("icon.svg");
     for (int i = 0; i < svg.getNumPath(); i++){
@@ -39,7 +39,7 @@ void ofApp::update(){
 void ofApp::draw(){
     
     // フォントの表示
-    ofSetColor(255);
+    ofSetColor(100);
     ttf.drawString("FONT", 250, 110);
     
     vector<ofPath> vecTtf = ttf.getStringAsPoints("FONT");
@@ -55,38 +55,38 @@ void ofApp::draw(){
     ofTranslate(250, 200);
     
     // 一文字ごと
-    for (vector<ofPath>::iterator it = vecTtf.begin(); it < vecTtf.end(); it++) {
-        ofSetColor(255);
-        //it->draw(0, 0);
-        vector<ofPolyline> outline = it->getOutline();
-        
-        int size = outline.size();
-        for (int i = 0; i < size; i++) {
-            ofPolyline polyline = outline.at(i);
-            drawPolyline(polyline);
-            ofPushMatrix();
-            ofTranslate(0, 110);
-            drawPolyline(polyline.getResampledBySpacing(spacing));
-            ofTranslate(0, 110);
-            drawPolyline(polyline.getResampledByCount(count));
-            ofTranslate(0, 110);
-            drawPolyline(polyline.getSmoothed(smoothed));
-            ofTranslate(0, 110);
-            drawPolyline(polyline.getResampledBySpacing(spacing).getSmoothed(smoothed));
-            ofTranslate(0, 110);
-            drawPolyline(polyline.getResampledByCount(count).getSmoothed(smoothed));
-            ofPopMatrix();
-        }
-    }
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(500, 10);
+//    for (vector<ofPath>::iterator it = vecTtf.begin(); it < vecTtf.end(); it++) {
+//        ofSetColor(255);
+//        //it->draw(0, 0);
+//        vector<ofPolyline> outline = it->getOutline();
+//
+//        int size = outline.size();
+//        for (int i = 0; i < size; i++) {
+//            ofPolyline polyline = outline.at(i);
+//            drawPolyline(polyline);
+//            ofPushMatrix();
+//            ofTranslate(0, 110);
+//            drawPolyline(polyline.getResampledBySpacing(spacing));
+//            ofTranslate(0, 110);
+//            drawPolyline(polyline.getResampledByCount(count));
+//            ofTranslate(0, 110);
+//            drawPolyline(polyline.getSmoothed(smoothed));
+//            ofTranslate(0, 110);
+//            drawPolyline(polyline.getResampledBySpacing(spacing).getSmoothed(smoothed));
+//            ofTranslate(0, 110);
+//            drawPolyline(polyline.getResampledByCount(count).getSmoothed(smoothed));
+//            ofPopMatrix();
+//        }
+//    }
+//    ofPopMatrix();
+//
+//    ofPushMatrix();
+//    ofTranslate(500, 10);
     svg.draw();
-    
-    ofTranslate(0, 110);
+//
+//    ofTranslate(0, 110);
     for (int i = 0; i < svgLines.size(); i++) {
-        
+
         ofPolyline polyline = svgLines.at(i);
         drawPolyline(polyline);
         ofPushMatrix();
@@ -102,14 +102,14 @@ void ofApp::draw(){
         drawPolyline(polyline.getResampledByCount(count).getSmoothed(smoothed));
         ofPopMatrix();
     }
-    
-    ofPopMatrix();
+//
+//    ofPopMatrix();
 }
 
 
 void ofApp::drawPolyline(ofPolyline polyline) {
     ofSetColor(255, 0, 255);
-    polyline.draw();
+//    polyline.draw();
     
     vector< glm::vec3 > vertices = polyline.getVertices();
     int size = vertices.size();
@@ -121,7 +121,7 @@ void ofApp::drawPolyline(ofPolyline polyline) {
         normal *= 10;
         ofDrawCircle(point.x, point.y, 2);
         ofSetColor(0, 255, 255);
-        ofDrawLine(point.x, point.y, point.x + normal.x, point.y + normal.y);
+//        ofDrawLine(point.x, point.y, point.x + normal.x, point.y + normal.y);
     }
 }
 

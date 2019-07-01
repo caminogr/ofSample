@@ -22,20 +22,15 @@ public:
     void mouseReleased(int x, int y, int button);
     void windowResized(int w, int h);
     void dumpOSC(ofxOscMessage m); //OSCメッセージを出力
-    // ofTTFCharacter getCharacterAsPoints(int character);
 
 private:
-    ofxBox2d box2d;
-    vector<shared_ptr<ofxBox2dCircle>> circles;
-    ofTrueTypeFont font;
-    vector<ofPath> paths;
-
     //OSCメッセージを受信するインスタンス
     ofxOscReceiver    receiver;
-    //マウス座標
-    // int remoteMouseX, remoteMouseY;
-    //マウスボタンの状態 ("up", "down")
-    // string mouseButtonState;
-    //string oscString;
+    ofxBox2d box2d;
+    vector<shared_ptr<ofxBox2dCircle>> circles;
+    vector<ofPath> paths;
+    ofTrueTypeFont font;
     string postedText;
+
+    void drawPolyline(ofPolyline polyline);
 };
