@@ -3,9 +3,14 @@
 void ofApp::setup(){
     // ofSetWindowShape(600, 400);
     ofSetFrameRate(30);
-    // ofSetBackgroundColor(249);
+    ofSetBackgroundColor(249);
 
-    font.load("NotoSansCJKjp-Regular.ttf", 72, true, true, true);
+    // font.load("NotoSansCJKjp-Regular.ttf", 72, true, true, true);
+    ofTrueTypeFontSettings font_settings("Apple Color Emoji.ttc", 30);
+    // font_settings.contours = true;
+    font_settings.addRanges(ofAlphabet::Emoji);
+    font.load(font_settings);
+    // font.load("NotoSansCJKjp-Regular.ttf", 72, true, true, true);
 
     //指定したポートで接続
     receiver.setup( PORT );
@@ -68,38 +73,45 @@ void ofApp::dumpOSC(ofxOscMessage m) {
 
 void ofApp::draw(){
     ofSetColor(0);
-    string word = "Hello World";
+    string word = "💩";
 
     // font.drawString(postedText, 100, 200);
-    paths = font.getStringAsPoints(word, true, true);
+    // paths = font.getStringAsPoints(word, true, true);
+    ofSetColor(21, 122, 184);
+    font.drawString(word, 170, 300);
+    // ofSetColor(199, 179, 1);
 
-    for (int i = 0; i < paths.size(); i++) {
-        // vector<ofPolyline> polylines = paths[i].ofPath::getOutline();
-      paths[i].setStrokeWidth(2.0);
-      // paths[i].setFilled(true);
-      // paths[i].setFillColor(ofColor::darkGray);
-      vector<ofPolyline> polylines = paths[i].getOutline();
+    // font.drawString(word, 200, 300);
+    // ofSetColor(163, 5, 44);
+    // font.drawString(word, 230, 300);
 
-      ofPushMatrix();
-        ofTranslate(300, 300);
-        ofMesh mesh;
-        ofTessellator t;
-        t.tessellateToMesh(polylines, ofPolyWindingMode::OF_POLY_WINDING_ODD, mesh);
-        // vector<ofMeshFace> triangles = mesh.getUniqueFaces();
-        for(int j = 0; j < mesh.getVertices().size(); j++){
-          mesh.addColor(ofColor(255,0,0));
-        }
-        mesh.draw();
-      ofPopMatrix();
+    // for (int i = 0; i < paths.size(); i++) {
+        // // vector<ofPolyline> polylines = paths[i].ofPath::getOutline();
+      // paths[i].setStrokeWidth(2.0);
+      // // paths[i].setFilled(true);
+      // // paths[i].setFillColor(ofColor::darkGray);
+      // vector<ofPolyline> polylines = paths[i].getOutline();
 
-      // ofPushMatrix();
-        // ofTranslate(300, 200);
-        // for (int j = 0; j < polylines.size(); j++){
-             // ofPolyline p = polylines.at(j);
-             // drawPolyline(p);
-        // }
-      // ofPopMatrix();
-    }
+      // // ofPushMatrix();
+        // // ofTranslate(300, 300);
+        // // ofMesh mesh;
+        // // ofTessellator t;
+        // // t.tessellateToMesh(polylines, ofPolyWindingMode::OF_POLY_WINDING_ODD, mesh);
+        // // // vector<ofMeshFace> triangles = mesh.getUniqueFaces();
+        // // for(int j = 0; j < mesh.getVertices().size(); j++){
+          // // mesh.addColor(ofColor(255,0,0));
+        // // }
+        // // mesh.draw();
+      // // ofPopMatrix();
+
+      // // ofPushMatrix();
+        // // ofTranslate(300, 200);
+        // // for (int j = 0; j < polylines.size(); j++){
+             // // ofPolyline p = polylines.at(j);
+             // // drawPolyline(p);
+        // // }
+      // // ofPopMatrix();
+    // }
 }
 
 void ofApp::drawPolyline(ofPolyline polyline) {
@@ -115,6 +127,7 @@ void ofApp::drawPolyline(ofPolyline polyline) {
         ofDrawCircle(point.x, point.y, 10);
     }
 }
+
 
 void ofApp::keyPressed (int key){
    //  create a new circle
