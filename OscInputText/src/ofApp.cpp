@@ -11,9 +11,6 @@ void ofApp::setup() {
 
   receiver.setup(PORT);
 
-  float app_time = ofGetElapsedTimef();
-  float animation_time = fmodf(app_time, 2) / 2.;
-
   box2d.init();
   box2d.setGravity(0, 5);
   box2d.createGround();
