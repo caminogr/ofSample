@@ -31,6 +31,7 @@ private:
     vector<ofPath> paths;
     ofTrueTypeFont font;
     string postedText;
+    string word;
 
     void drawPolyline(ofPolyline polyline);
 };

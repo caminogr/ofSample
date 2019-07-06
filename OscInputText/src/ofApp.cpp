@@ -18,11 +18,12 @@ void ofApp::setup(){
     float app_time = ofGetElapsedTimef();
     float animation_time = fmodf(app_time, 2) / 2.;
 
-    // box2d.init();
-    // box2d.createGround();
-    // box2d.createBounds();
-    // box2d.registerGrabbing();
-    // box2d.setFPS(60);
+    box2d.init();
+    box2d.setGravity(0, 5);
+    box2d.createGround();
+    box2d.createBounds();
+    box2d.registerGrabbing();
+    box2d.setFPS(60);
 }
 
 void ofApp::update(){
@@ -43,7 +44,28 @@ void ofApp::update(){
 
         dumpOSC(m);
     }
-    // box2d.update();
+
+    // dumpOSC(m);
+
+  float radius = 15;
+  auto circle = make_shared<ofxBox2dCircle>();
+  circle->setPhysics(1.0, 0.63, 0.1);
+  circle->setup(this->box2d.getWorld(),
+                ofRandom(ofGetWidth() * 0.5 - 50, ofGetWidth() * 0.5 + 50), 15,
+                radius);
+  this->circles.push_back(circle);
+
+  word = "💩";
+  box2d.update();
+}
+
+void ofApp::draw(){
+    ofSetColor(0);
+
+    ofTranslate(this->circles[0]->getPosition().x, this->circles[0]->getPosition().y);
+    ofSetColor(21, 122, 184);
+
+   font.drawString(word, 170, 300);
 }
 
 //OSCメッセージをコンソールに出力する関数
